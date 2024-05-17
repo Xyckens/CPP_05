@@ -12,9 +12,9 @@
 
 NAME = ex02
 
-CC = c++
+CXX = c++
 
-C_FLAGS = -Wall -Werror -Wextra -std=c++98
+CXX_FLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRC = main.cpp \
 	Bureaucrat.cpp \
@@ -24,12 +24,15 @@ SRC = main.cpp \
 	PresidentialPardonForm.cpp
 	
 
+%.o:	%.cpp
+	$(CXX) $(CXX_FLAGS) -c $< -o $@
+
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(C_FLAGS) $(SRC) -o $(NAME)
+	$(CXX) $(CXX_FLAGS) $(SRC) -o $(NAME)
 	
 clean:
 	rm -rf $(OBJ)
