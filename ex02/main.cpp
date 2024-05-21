@@ -11,82 +11,91 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 int main(void)
 {
-	try
+	
+	std::cout << "\n....................................................\n";
+	std::cout << "PresidentialPardonForm" << std::endl;
+	std::cout << "....................................................\n";
+	Bureaucrat Frank("Frank", 5);
+	std::cout << Frank;
+	AForm *PresForm = new PresidentialPardonForm("target");
 	{
-		Bureaucrat tester("Jebediah", 10);
-		std::cout << tester;
-		Form form("Standard", 10, 15);
-
-		form.beSigned(tester);
-		tester.signForm(form);
+		try
+		{
+			std::cout << "\n\t\tTest: Execute form but Not signed\n\n";
+			Frank.executeForm(*PresForm);
+			
+			std::cout << "\n\t\tTest: Execute form but Grade lower\n\n";
+			Frank.signForm(*PresForm);
+			Frank.executeForm(*PresForm);
+			
+			std::cout << "\n\t\tTest: Execute Form\n\n";
+			Frank.incrementGrade();
+			Frank.executeForm(*PresForm);
+		}
+		catch (std::exception &e)
+		{
+			std::cout << "Error!" << e.what() << std::endl;
+		}
 	}
-	catch(std::exception &e)
+	std::cout << "\n....................................................\n\n";
+	std::cout << "RobotomyRequestForm" << std::endl;
+	std::cout << "....................................................\n\n";
+	Bureaucrat Paul("Paul", 46);
+	std::cout << Paul;
+	AForm *B = new RobotomyRequestForm();
 	{
-		std::cout << std::endl << e.what() << std::endl;
+		try
+		{
+			std::cout << "\n\t\tTest: Execute form but Not signed\n\n";
+			Paul.executeForm(*B);
+			
+			std::cout << "\n\t\tTest: Execute form but Grade lower\n\n";
+			Paul.signForm(*B);
+			Paul.executeForm(*B);
+			
+			std::cout << "\n\t\tTest: Execute Form\n\n";
+			Paul.incrementGrade();
+			Paul.executeForm(*B);
+		}
+		catch (std::exception &e)
+		{
+			std::cout << "Error!" << e.what() << std::endl;
+		}
 	}
-	try
+	std::cout << "\n....................................................\n\n";
+	std::cout << "ShrubberyCreationForm" << std::endl;
+	std::cout << "....................................................\n\n";
+	Bureaucrat John("John", 138);
+	std::cout << John;
+	AForm *C = new ShrubberyCreationForm("Christmas");
 	{
-		std::cout << "\nInvalid grade form:\n";
-		Form form("Too high", 0, 15);
+		try
+		{
+			std::cout << "\n\t\tTest: Execute form but Not signed\n\n";
+			John.executeForm(*C);
+			
+			std::cout << "\n\t\tTest: Execute form but Grade lower\n\n";
+			John.signForm(*C);
+			John.executeForm(*C);
+			
+			std::cout << "\n\t\tTest: Execute Form\n\n";
+			John.incrementGrade();
+			John.executeForm(*C);
+		}
+		catch (std::exception &e)
+		{
+			std::cout << "Error!" << e.what() << std::endl;
+		}
 	}
-	catch(std::exception &e)
-	{
-		std::cout << std::endl << e.what() << std::endl;
-	}
-	try
-	{
-		Form form1("Too low", 200, 15);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << std::endl << e.what() << std::endl;
-	}
-	try
-	{
-		Form form2("Too high 2", 15, 0);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << std::endl << e.what() << std::endl;
-	}
-	try
-	{
-		Form form3("Too low 2", 15, 200);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << std::endl << e.what() << std::endl;
-	}
-	try
-	{
-		std::cout << "\nCant sign this form:\n";
-		Bureaucrat tester("Jebediah", 20);
-		Form form("Standard", 15, 15);
-		std::cout << tester;
-
-		form.beSigned(tester);
-		tester.signForm(form);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << std::endl << e.what() << std::endl;
-	}
-	try
-	{
-		Bureaucrat tester("Jebediah", 20);
-		Form form("Standard", tester.getGrade(), 15);
-		std::cout << tester;
-
-		form.beSigned(tester);
-		tester.signForm(form);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << std::endl << e.what() << std::endl;
-	}
+	delete PresForm;
+	delete B;
+	delete C;
 	return (0);
 }
