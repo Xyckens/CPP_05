@@ -14,72 +14,41 @@
 
 int main(void)
 {
-	try
-	{
-		Bureaucrat b("Too high", 1);
-		std::cout << b;
-		std::cout << "Incrementing:\n";
-		b.incrementGrade();
-		std::cout << b;
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << "\n";
-	}
-	
-	try
-	{
-		Bureaucrat b("Too low", 150);
-		std::cout << b;
-		std::cout << "Decrementing:\n";
-		b.decrementGrade();
-		std::cout << b;
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << "\n";
-	}
 
-	try
-	{
-		Bureaucrat b("Increment to highest", 2);
-		std::cout << b;
-		b.incrementGrade();
-		std::cout << b;
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << "\n";
-	}
+	Bureaucrat a1;
+	std::cout << a1;
 	
-	try
-	{
-		Bureaucrat b("Decrement to lowest", 149);
-		std::cout << b;
-		b.decrementGrade();
-		std::cout << b;
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << "\n";
-	}
+	Bureaucrat a("Too high", 1);
+	std::cout << a;
+	std::cout << "Incrementing:\n";
+	a.incrementGrade();
+	std::cout << a << std::endl;
 
-	try
-	{
-		Bureaucrat b("Invalid Low Grade", 0);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << "\n";
-	}
+	Bureaucrat b("Too low", 150);
+	std::cout << b;
+	std::cout << "Decrementing:\n";
+	b.decrementGrade();
+	std::cout << b << std::endl;
 	
-	try
-	{
-		Bureaucrat b("Invalid High Grade", 151);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << "\n";
-	}
+	Bureaucrat c("Increment to highest", 2);
+	std::cout << c;
+	c.incrementGrade();
+	std::cout << c << std::endl;
+	
+	Bureaucrat e("Decrement to lowest", 149);
+	std::cout << e;
+	e.decrementGrade();
+	std::cout << e << std::endl;
+
+	Bureaucrat f("Invalid Low Grade", 0);
+
+	Bureaucrat g("Invalid High Grade", 151);
+
+	Bureaucrat h("Original", 54);
+	std::cout << h;
+	Bureaucrat i("To copy", 43);
+	std::cout << i;
+	h = i;
+	std::cout << h;
 	return (0);
 }
