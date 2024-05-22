@@ -31,6 +31,7 @@ private:
 public:
 	Form();
 	Form(std::string const name, int const signGrade, int const execGrade);
+	Form(Form const& copy);
 	Form& operator=(Form const& other);
 	~Form();
 
@@ -48,6 +49,12 @@ public:
 	};
 
 	class GradeTooLowException : public std::exception
+	{
+	public:
+		const char* what() const throw();
+	};
+	
+	class FormNotSignedException : public std::exception
 	{
 	public:
 		const char* what() const throw();

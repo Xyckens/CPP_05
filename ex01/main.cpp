@@ -15,78 +15,34 @@
 
 int main(void)
 {
-	try
-	{
 		Bureaucrat tester("Jebediah", 10);
 		std::cout << tester;
-		Form form("Standard", 10, 15);
+		Form jeb("Standard", 10, 15);
 
-		form.beSigned(tester);
-		tester.signForm(form);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << std::endl << e.what() << std::endl;
-	}
-	try
-	{
-		std::cout << "\nInvalid grade form:\n";
+		jeb.beSigned(tester);
+		tester.signForm(jeb);
+	
+		std::cout << "\n\t\tInvalid grade form:\n";
 		Form form("Too high", 0, 15);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << std::endl << e.what() << std::endl;
-	}
-	try
-	{
+	
 		Form form1("Too low", 200, 15);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << std::endl << e.what() << std::endl;
-	}
-	try
-	{
+	
 		Form form2("Too high 2", 15, 0);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << std::endl << e.what() << std::endl;
-	}
-	try
-	{
+	
 		Form form3("Too low 2", 15, 200);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << std::endl << e.what() << std::endl;
-	}
-	try
-	{
-		std::cout << "\nCant sign this form:\n";
-		Bureaucrat tester("Jebediah", 20);
-		Form form("Standard", 15, 15);
-		std::cout << tester;
+	
+		std::cout << "\n\t\tCant sign this form:\n";
+		Bureaucrat tester2("Carl", 20);
+		Form stan("Standard", 15, 15);
+		std::cout << tester2;
 
-		form.beSigned(tester);
-		tester.signForm(form);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << std::endl << e.what() << std::endl;
-	}
-	try
-	{
-		Bureaucrat tester("Jebediah", 20);
-		Form form("Standard", tester.getGrade(), 15);
-		std::cout << tester;
+		tester2.signForm(stan);
+	
+		Bureaucrat tester3("George", 20);
+		Form ai("Standard", tester3.getGrade(), 15);
+		std::cout << tester3;
 
-		form.beSigned(tester);
-		tester.signForm(form);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << std::endl << e.what() << std::endl;
-	}
+		tester3.signForm(ai);
+	
 	return (0);
 }

@@ -14,6 +14,9 @@
 #define INTERN_HPP
 
 # include "AForm.hpp"
+# include "PresidentialPardonForm.hpp"
+# include "ShrubberyCreationForm.hpp"
+# include "RobotomyRequestForm.hpp"
 
 class Intern
 {
@@ -24,9 +27,9 @@ public:
 	~Intern();
 	
 	AForm	*makeForm(std::string const &name, std::string const &target);
-	AForm	*makeShrubberyCreationForm(std::string const &target) const;
-	AForm	*makeRobotomyRequestForm(std::string const &target) const;
-	AForm	*makePresidentialPardonForm(std::string const &target) const;
+	AForm	*makeShrubberyCreationForm(std::string const &target);
+	AForm	*makeRobotomyRequestForm(std::string const &target);
+	AForm	*makePresidentialPardonForm(std::string const &target);
 
 	class	BadFormException: public std::exception
 	{
@@ -34,6 +37,6 @@ public:
 			virtual const char *what() const throw();
 	};
 
-}
+};
 
 #endif

@@ -25,18 +25,32 @@ Bureaucrat::Bureaucrat(const Bureaucrat& copy)
 
 void	Bureaucrat::incrementGrade(void)
 {
-	if (this->grade == 1)
-		throw Bureaucrat::GradeTooHighException();
-	else
-		this->grade -= 1;
+	try
+	{
+		if (this->grade == 1)
+			throw Bureaucrat::GradeTooHighException();
+		else
+			this->grade -= 1;
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << e.what();
+	}
 }
 
 void	Bureaucrat::decrementGrade(void)
 {
-	if (this->grade == 150)
-		throw Bureaucrat::GradeTooLowException();
-	else
-		this->grade += 1;
+	try
+	{
+		if (this->grade == 150)
+			throw Bureaucrat::GradeTooLowException();
+		else
+			this->grade += 1;
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << e.what();
+	}
 }
 
 int	Bureaucrat::getGrade(void) const
@@ -86,7 +100,7 @@ void	Bureaucrat::signForm(AForm& form)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << name << " couldn't sign " << form.getName() << " because " << e.what() << "\n";
+		std::cerr << name << " couldn't sign " << form.getName() << " because " << e.what() << "\n";
 	}
 }
 
@@ -100,7 +114,7 @@ void	Bureaucrat::executeForm(const AForm& form) const
 	}
 	catch (std::exception &e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 }
 

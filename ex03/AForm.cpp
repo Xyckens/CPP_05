@@ -17,10 +17,10 @@ AForm::AForm() : name("standard"), signature(false), signGrade(75), execGrade(75
 	std::cout << "Default Constructor called\n";
 }
 
-AForm::AForm(const AForm& copy): name(copy.name), signature(copy.signature), signGrade(copy.signGrade), execGrade(copy.execGrade)
+AForm::AForm(const AForm& copy): name(copy.name), signature(copy.signature),
+								 signGrade(copy.signGrade), execGrade(copy.execGrade)
 {
 	std::cout << "AForm copy constructor called" << std::endl;
-	*this = copy;
 }
 
 int	AForm::getSignGrade(void) const
@@ -61,26 +61,42 @@ const char *AForm::FormNotSignedException::what() const throw()
 AForm::AForm(std::string const name, int const signGrade, int const execGrade): 
 	name(name), signature(false), signGrade(signGrade), execGrade(execGrade)
 {
-	if (signGrade > 150)
-		throw AForm::GradeTooLowException();
-	else if (signGrade < 1)
-		throw AForm::GradeTooHighException();
-
-	if (execGrade > 150)
-		throw AForm::GradeTooLowException();
-	else if (execGrade < 1)
-		throw AForm::GradeTooHighException();
-	std::cout << "AForm constructor with input variables.\n";
+	try
+	{
+		if (signGrade > 150)
+			throw AForm::GradeTooLowException();
+		else if (signGrade < 1)
+			throw AForm::GradeTooHighException();
+		if (execGrade > 150)
+			throw AForm::GradeTooLowException();
+		else if (execGrade < 1)
+			throw AForm::GradeTooHighException();
+		std::cout << "AForm constructor with input variables.\n";
+	}
+	catch(std::exception &e)
+	{
+		std::cerr << "Error creating Form " << e.what();
+	}
 }
 
 void	AForm::beSigned(Bureaucrat& b)
 {
-	if (b.getGrade() <= this->getSignGrade())
-		this->signature = true;
-	else
+	try
 	{
-		this->signature = false;
-		throw AForm::GradeTooLowException();
+		if (b.getGrade() <= this->getSignGrade())
+		{
+			this->signature = true;
+			std::cout << this->name << " was signed by " << b.getName() << std::endl;
+		}
+		else
+		{
+			this->signature = false;
+			throw AForm::GradeTooLowException();
+		}
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << e.what();
 	}
 }
 
@@ -98,7 +114,7 @@ void 		AForm::execute(const Bureaucrat& bureau) const
 	}
 	catch (std::exception &e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 }
 
